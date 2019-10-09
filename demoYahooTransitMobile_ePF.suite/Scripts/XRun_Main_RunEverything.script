@@ -1,0 +1,6 @@
+﻿Connect "KYV42"
+
+run "01_StartTransitSite"
+run "02_OpenExcel"
+
+KillApp "com.android.chrome"

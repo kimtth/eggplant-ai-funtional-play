@@ -1,0 +1,82 @@
+﻿to findInfoYahoo itemRow
+	
+	-- get searchkeyword text
+	put property departure of itemRow into searchKeywordfrom
+	put property arrival of itemRow into searchKeywordTo
+	
+	LogSuccess searchKeywordfrom & "/" & searchKeywordTo
+	
+	-- 1. Transit Main Page
+	-- check the loading is completed
+	run "Util/IsLoadCompleted"'s isLoad
+	
+	-- input text in the text filed areas
+	WaitFor 1, "web_departure"
+	run "Util/CleanTextfield".clean_field "web_departure" //clean text field
+	wait 1
+	TypeText searchKeywordfrom
+	wait 1
+	
+	run "Util/RemoveKeyBoard"
+	
+	Repeat until ImageFound(Image: "web_arrival", WaitFor:1.0)
+		SwipeUp
+		wait 0.5
+	End Repeat
+	
+	run "Util/CleanTextfield".clean_field "web_arrival" //clean text field
+	wait 1
+	TypeText searchKeywordTo
+	wait 1
+	
+	run "Util/RemoveKeyBoard"
+	
+	-- finding search button & click search
+	Repeat until ImageFound(Image: "web_search", WaitFor:1.0)
+		SwipeUp
+		wait 0.5
+	End Repeat
+	Click FoundImageLocation()	
+	
+	-- 2. Move to Result Page
+	-- check the loading is completed
+	run "Util/IsLoadCompleted"'s isLoad
+	
+	-- get commute pass from web
+	Repeat until ImageFound(Image: "web_commutepass", WaitFor:1.0)
+		SwipeUp
+		wait 0.5
+	End Repeat
+	
+	Click FoundImageLocation()	
+	
+	SwipeUp
+	wait 0.5
+	
+	// Start get data from Web
+	set theResultData to ReadText("result_area_A","result_area_B", Language:"Japanese")
+	Log theResultData
+	
+	put Split(theResultData, "円") into reSplitText
+	Log reSplitText
+	
+	put () into TargetList
+	repeat with each item of reSplitText
+		Log it
+		delete every occurrence of return in it //not \n, should be "return" 
+		delete every occurrence of "," in it
+		put it into compareTarget
+		
+		insert compareTarget into TargetList
+	end repeat
+	Log TargetList
+	
+	-- compare data in the excel
+	run CompareWithExcel's compareDataWithExcel itemRow, TargetList
+	
+	wait 1
+	run BackToYahooTransit's backToYahooMain
+	
+	Log "Thanks Yahoo !! See you soon " 
+	
+end findInfoYahoo

@@ -1,0 +1,39 @@
+﻿to makeCsvDataByResult resultPayLoad
+	-- -- the filepath declared on the another script could not use in the function parameter. ??maybe 
+	//put "C:\Users\P0106584\Desktop\Result.csv" into MyResultFile
+	put SuiteInfo().path & slash & "Result.csv" into MyResultFile
+	LogSuccess MyResultFile
+	LogSuccess "result : " & resultPayLoad
+	-- put the number of items in resultPayLoad into CountItem
+	-- put item 1 of resultPayLoad into checkData
+	-- put the number of items in checkData into CountItem
+	
+	if resultPayLoad not empty
+		repeat with each item of resultPayLoad
+			// the file exit check, if it is not make a file
+			if there is a file MyResultFile then		
+				open file MyResultFile for appending
+			else
+				create file MyResultFile
+				open file MyResultFile for writing
+			end if
+			
+			// http://www2.testplant.com/phpBB2/viewtopic.php?p=417&sid=8ccc8a1b96bf2704ef8b37fca014da79
+			put it into MyResultFileData
+			Repeat with each item of keys(MyResultFileData) 
+				put it into PropName 
+				put property (it) of MyResultFileData into PropValue 
+				
+				put "The Property Name is: " & PropName 
+				put "The Property Value is: " & PropValue 
+				// writes the text from the variable into the file	
+				write "," & PropName & "," & PropValue  to file MyResultFile 
+			end repeat 
+			
+			// adds a return character to the end of the file 
+			write return to file MyResultFile at eof
+		end repeat
+		
+		close file MyResultFile
+	end if	
+end makeCsvDataByResult

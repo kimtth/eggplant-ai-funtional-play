@@ -1,0 +1,8 @@
+﻿to transitInfoCheck itemRow
+	if itemRow is not empty
+		run "04_findInfoYahoo".findInfoYahoo itemRow
+		return true
+	else
+		return false
+	end if
+end transitInfoCheck

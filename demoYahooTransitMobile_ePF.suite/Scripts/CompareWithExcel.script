@@ -1,0 +1,55 @@
+﻿to compareDataWithExcel excelData, WebData
+
+	Log "excelData: " & excelData
+	
+	put property no of excelData into employerNo
+	put property @"price(1m)" of excelData into commutePass1mon
+	put property @"price(3m)" of excelData into commutePass3mon
+	put property @"price(6m)" of excelData into commutePass6mon
+	
+	-- make new list with filtering, which is target data of comparison
+	-- insert employerNo into targetDataFromExcel
+	put () into targetDataFromExcel
+	insert commutePass1mon into targetDataFromExcel
+	insert commutePass3mon into targetDataFromExcel
+	insert commutePass6mon into targetDataFromExcel
+	
+	-- compare data between web and excel
+	put targetDataFromExcel equals WebData into booleanChecker
+	
+	Log "WebData: " & WebData
+	
+	-- take a data from webdata
+	put item 1 of WebData into commutePass1monTO
+	put item 2 of WebData into commutePass3monTO
+	put item 3 of WebData into commutePass6monTO
+	
+	//replace "," by "" in commutePass1monTO
+	//replace "," by "" in commutePass3monTO
+	//replace "," by "" in commutePass6monTO
+	
+	put True into booleanChecker
+	put () into notEqualsDataforExcel
+	if commutePass1mon is not commutePass1monTO
+		insert (@"1month":commutePass1mon) into notEqualsDataforExcel
+		put False into booleanChecker
+	end if
+	if commutePass3mon is not commutePass3monTO
+		insert (@"3month":commutePass3mon) into notEqualsDataforExcel
+		put False into booleanChecker
+	end if
+	if commutePass6mon is not commutePass6monTO
+		insert (@"6month":commutePass6mon) into notEqualsDataforExcel
+		put False into booleanChecker
+end if
+
+-- make a resultpayload
+put () into Resultpayload
+if booleanChecker equals False
+	insert ("employerNo":employerNo, checkData:notEqualsDataforExcel) into Resultpayload
+end if
+
+Log "Resultpayload: " & Resultpayload
+run MakeCSVreport's makeCsvDataByResult Resultpayload 
+	
+end compareDataWithExcel

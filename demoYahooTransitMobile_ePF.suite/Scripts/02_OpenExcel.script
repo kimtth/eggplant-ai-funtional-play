@@ -1,0 +1,23 @@
+﻿--- ReadData from  excel
+put "D:\workspace\demoYahooTransitMobile.suite\transitSheet.xlsx" into Excelfilepath
+set myExcelDB to (type:"excel", file: Excelfilepath) 
+
+put the records of myExcelDB into Rows
+
+repeat with each item of Rows
+	Log "<Start Compare Data from Excel's Row =====================>"
+	Log it
+	put it into paramIn
+	
+	run "03_SearchTransitInfo"'s transitInfoCheck paramIn
+	
+	Log ">>End Compare Data from Excel's Row =================="
+end repeat
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+﻿to backToYahooMain 
+	
+	TypeText backButton
+	run "Util/IsLoadCompleted"'s isLoad
+	
+	//repeat until ImageFound("web_yahoo_transit_home")
+	repeat until ImageFound(Image: "web_departure", WaitFor:1.0)
+		SwipeDown
+		wait 0.5
+	end repeat
+	
+end backToYahooMain  

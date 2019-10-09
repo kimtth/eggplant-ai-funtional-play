@@ -1,0 +1,4 @@
+﻿
+if ImageFound(1, "sut_keyboard_unicode") then
+	TypeText backButton
+end if

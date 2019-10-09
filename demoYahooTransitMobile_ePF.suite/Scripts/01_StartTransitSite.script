@@ -1,0 +1,7 @@
+﻿repeat until ImageFound(Image: "web_yahoo_transit", WaitFor:1.0)
+	SwipeLeft 
+	wait 0.5
+end repeat
+
+Click FoundImageLocation()
+

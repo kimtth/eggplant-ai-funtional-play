@@ -1,0 +1,5 @@
+﻿
+if Imagefound(2, "web_close_pop_list") then
+	Click FoundImageLocation()
+end if
+
