@@ -1,0 +1,10 @@
+﻿DoubleClick "app_chrome"
+WaitFor 30, "chrome_url"
+Click (Image:"chrome_url", WaitFor:34)
+TypeText "https://transit.yahoo.co.jp"
+TypeText Return
+
+Waitfor 50, "chrome_end_load"
+
+
+

@@ -1,0 +1,8 @@
+﻿to backToYahooMain 
+	Repeat until ImageFound("web_yahooTransit")
+		TypeText PageUp
+		wait 5
+	End Repeat
+	
+	Click(ImageName:"web_yahooTransit")
+end backToYahooMain  

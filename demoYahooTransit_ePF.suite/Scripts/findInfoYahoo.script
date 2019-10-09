@@ -1,0 +1,55 @@
+﻿to findInfoYahoo itemRow
+	
+	-- get searchkeyword text
+	put property departure of itemRow into searchKeywordfrom
+	put property arrival of itemRow into searchKeywordTo
+	
+	LogSuccess searchKeywordfrom, searchKeywordTo
+	
+	wait 10
+	Click (Image:"web_departure", WaitFor:53)
+	TypeText searchKeywordfrom
+	wait 5
+	
+	Click "web_arrival"
+	TypeText searchKeywordTo
+	wait 5
+	
+	-- finding search button & click search
+	Repeat until ImageFound("web_searchButton")
+		TypeText pageDown
+		wait 2
+	End Repeat
+	
+	-- click most fasest commute route
+	Click "web_searchButton"	
+	WaitFor 20, "web_routeone"
+	Click (Image:"web_routeone")
+	
+	WaitFor 20, "web_commutepass"
+	-- find first img in the list and click route 1
+	Put EveryImageLocation("web_commutepass") into commutePassImages
+	Click item 1 of commutePassImages
+	
+	-- Read Text from Rectangle
+	-- Split string for getting commute pass price
+	Set readResult to ReadText("rec_pass_bottomright_A", "rec_pass_bottomright_B", Language:"Japanese")
+	put Split(readResult, "月") into passResultList
+	
+	put () into TargetList
+	repeat with each item of passResultList
+		put Split(it, "円") into reSplitText
+		put item 1 of reSplitText into compareTarget
+		insert compareTarget into TargetList
+	end repeat
+	
+	-- delete the first data in the list
+	delete item 1 of TargetList
+	run CompareWithExcel's compareDataWithExcel itemRow, TargetList
+	
+	wait 5
+	run BackToYahooTransit's backToYahooMain
+	
+	Log "Bye Bye the yahoo !!" 
+	
+end findInfoYahoo

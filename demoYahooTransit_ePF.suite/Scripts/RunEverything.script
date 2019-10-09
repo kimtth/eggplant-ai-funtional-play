@@ -1,0 +1,5 @@
+﻿StartChrome
+OpenExcel
+-- closing chrome
+wait 5
+Click (Image:"chrome_exit")

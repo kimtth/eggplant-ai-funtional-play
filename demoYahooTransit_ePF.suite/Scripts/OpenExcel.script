@@ -1,0 +1,47 @@
+﻿--- ReadData from  excel
+put "D:\workspace\demoActor.suite\transitSheet.xlsx" into Excelfilepath
+set myExcelDB to (type:"excel", file: Excelfilepath) 
+
+put the records of myExcelDB into Rows
+
+repeat with each item of Rows
+	Log "<Start====================="
+	Log it
+	put it into paramIn
+	run searchTransitInfo's transitInfoCheck paramIn
+	Waitfor 15, "web_yahooTransit"
+	-- Log the result
+	Log ">>End=================="
+end repeat
+
+
+
+
+(*Log the directory
+
+Set the directory to "D:\workspace\demoActor.suite\" 
+
+-- C:/Users/P0106584/Documents
+
+--Set TEST to Workbook ("../../../transitSheet.xlsx")
+-- Set TEST to Workbook ("../../transitSheet.xlsx")
+-- Set TEST to Workbook ("../transitSheet.xlsx")
+
+put ".\transitSheet.xlsx" into Excelfilepath
+Log Excelfilepath
+Set TEST to Workbook (Excelfilepath)
+
+put the records of TEST into Rows
+
+repeat with each item of Rows
+	Log it
+end repeat
+*)
+
+
+
+
+
+
+
+
