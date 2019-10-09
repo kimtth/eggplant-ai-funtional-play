@@ -1,0 +1,9 @@
+﻿to homeScreen
+	Wait 3
+	
+	If ImageFound("web_yahoo_logo") then
+		return true
+	else	
+		return false
+	End If
+end homeScreen

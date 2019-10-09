@@ -1,0 +1,4 @@
+﻿
+if ImageFound(3, "web_map_popup_close") then
+	Click FoundImageLocation()
+end if

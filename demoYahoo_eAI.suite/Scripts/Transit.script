@@ -1,0 +1,7 @@
+﻿WaitFor 3, "web_transit"
+Click FoundImageLocation()
+wait 1
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "TransitScreen"
+end if

@@ -1,0 +1,18 @@
+﻿if ImageFound(2, "web_back_to_potal") equals false then
+	TypeText backButton
+	wait 1
+end if
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "BackToHome"
+end if
+
+wait 1
+run "Util/RemoveMapPopup"
+wait 1
+
+Click "web_back_to_potal"
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "BackToHome"
+end if

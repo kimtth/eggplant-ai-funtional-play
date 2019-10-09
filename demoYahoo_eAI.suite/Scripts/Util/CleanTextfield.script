@@ -1,0 +1,19 @@
+﻿on clean_field target_img
+	
+	//for debugging
+	//put "web_transit_depart" into target_img
+	//Log target_img
+	
+	put the mouseClickDelay into clickTime
+	
+	set the mouseClickDelay to 1.0
+	Log the mouseClickDelay
+	
+	click target_img
+	TypeText deleteKey
+	
+	set the mouseClickDelay to clickTime
+	Log the mouseClickDelay
+	//TypeText backButton
+	
+end clean_field

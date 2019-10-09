@@ -1,0 +1,9 @@
+﻿
+repeat until ImageFound("web_yahoo_logo")
+	TypeText backButton
+	wait 1
+end repeat
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "BackToHome"
+end if

@@ -1,0 +1,29 @@
+﻿
+run "Util/RemoveKeyBoard"
+wait 1
+
+put 0 into flag
+repeat until  (flag=1)
+	if imagefound("web_map_search") then
+		put 1 into flag
+		Click foundimagelocation()
+	else if ImageFound(3, "web_map_popup_close") then
+		Click FoundImageLocation()
+	end if
+	
+	if repeatindex() is greater than 5
+		put 1 into flag
+	end if
+	
+	wait 1
+end repeat	
+
+set keyword to "横浜"
+
+TypeText keyword
+
+Click "web_map_search_enter"
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "MapScreen"
+end if

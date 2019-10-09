@@ -1,0 +1,13 @@
+﻿Log the RemoteScreenSize//Logs the resolution of the active SUT
+put the RemoteScreenSize into screenSize
+
+if the first item of screenSize is greater than 1200 then
+	TypeText rotateMobile
+	wait 2
+end if
+
+TypeText backButton
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "BackToHome"
+end if

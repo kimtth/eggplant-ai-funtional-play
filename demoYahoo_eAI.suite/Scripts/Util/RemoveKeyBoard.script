@@ -1,0 +1,4 @@
+﻿
+if ImageFound(1.5,"sut_keyboard_close") then
+	Click FoundImageLocation()
+end if

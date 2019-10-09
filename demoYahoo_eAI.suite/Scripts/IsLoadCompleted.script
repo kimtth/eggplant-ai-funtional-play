@@ -1,0 +1,31 @@
+﻿To isLoad
+	Click "chrome_menu_button"
+	
+	Log the RemoteScreenSize//Logs the resolution of the active SUT
+	put the RemoteScreenSize into screenSize
+	
+	if the first item of screenSize is greater than 1200 then
+		Set the searchRectangle to (0,0,1180,160)
+	else
+		Set the searchRectangle to (0,0,720,160)
+	end if
+	
+	Try
+		//set the ImageSearchDelay to 0.1
+		
+		repeat until ImageFound("chrome_refresh")
+			wait 1
+		end repeat
+		
+		set the SearchRectangle to empty //Back to full screen
+		//set the ImageSearchDelay to 0.3
+		
+		TypeText backButton
+		
+		return true
+	Catch exception
+		LogError "error"
+		return false
+		
+	End try	
+End isLoad

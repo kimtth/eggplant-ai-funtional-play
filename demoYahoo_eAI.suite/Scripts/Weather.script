@@ -1,0 +1,10 @@
+﻿
+WaitFor 3, "web_weather"
+
+Click FoundImageLocation()
+//Click (215,560)
+wait 1
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "WeatheScreen"
+end if

@@ -1,0 +1,52 @@
+﻿params depart, arrival
+
+-- for debugging
+//set depart to "tokyo"
+//set arrival to "osaka"
+
+run "Util/RemoveKeyBoard"
+
+if depart equal "tokyo" then
+	put "東京駅" into keyword 
+else if depart equals "osaka" then
+	put "新大阪駅" into keyword 
+else if depart equals "toyosu" then
+	put "豊洲駅" into keyword 
+end if
+
+waitfor 5, "web_transit_depart"
+Click FoundImageLocation()
+
+run "Util/CleanTextfield".clean_field "web_transit_depart" //clean text field
+wait 1
+TypeText keyword
+wait 1
+
+run "Util/RemoveKeyBoard"
+
+if arrival equal "tokyo" then
+	put "東京駅" into keyword 
+else if arrival equals "osaka" then
+	put "新大阪駅" into keyword
+else if arrival equals "toyosu" then
+	put "豊洲駅" into keyword 
+end if
+
+repeat until ImageFound("web_transit_arrival")
+	SwipeUp
+	wait 1
+end repeat
+
+Click FoundImageLocation()
+
+//run CleanTextfield's clean_field "web_transit_arrival" //clean text field, this is same under the below.
+run "Util/CleanTextfield"'s clean_field "web_transit_arrival" //clean text field
+wait 1
+TypeText keyword
+wait 1
+
+run "Util/RemoveKeyBoard"
+
+LogSuccess "Place from " & depart & " to " & arrival
+
+

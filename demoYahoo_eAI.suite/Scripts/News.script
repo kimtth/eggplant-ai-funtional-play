@@ -1,0 +1,8 @@
+﻿WaitFor 3, "web_news"
+
+Click FoundImageLocation()
+wait 1
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "NewsScreen"
+end if

@@ -1,0 +1,22 @@
+﻿params keyword
+
+run "Util/RemoveKeyBoard"
+
+waitFor 2, "web_search"
+
+run "Util/CleanTextfield".clean_field "web_search" //clean text field
+wait 1
+TypeText keyword
+wait 1
+
+-- for debugging
+//TypeText "Tensorflow"
+
+Waitfor 5, "web_search_button" 
+Click FoundImageLocation()
+
+wait 2
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "SearchResultScreen"
+end if
+

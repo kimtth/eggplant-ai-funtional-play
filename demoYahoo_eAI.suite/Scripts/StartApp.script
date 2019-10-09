@@ -1,0 +1,12 @@
+﻿repeat until ImageFound("sut_yahoo_bookmark")
+	SwipeLeft 
+	wait 1
+end repeat
+
+Click FoundImageLocation()
+
+if IsHomeScreen.homeScreen equals true then
+	IsLoadCompleted's isLoad
+	LogSuccess "Yahoo! Home Screen"
+	
+end if

@@ -1,0 +1,11 @@
+﻿repeat until ImageFound(5, "move_tensorflow")
+	SwipeUp
+	wait 1
+end repeat
+Click FoundImageLocation()
+
+WaitFor 5, "move_tensorflow_home"
+
+if IsLoadCompleted's isLoad equals true then
+	LogSuccess "TensorFlowScreen"
+end if

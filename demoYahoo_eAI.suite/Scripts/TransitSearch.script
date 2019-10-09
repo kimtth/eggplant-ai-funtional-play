@@ -1,0 +1,6 @@
+﻿repeat until ImageFound("web_transit_search")
+	SwipeUp 
+	wait 1
+end repeat
+
+Click FoundImageLocation()
